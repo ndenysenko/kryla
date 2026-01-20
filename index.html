@@ -337,65 +337,7 @@
             </div>
           <div class="swiper-wrapper" id="swiper-wrapper-fixed">
   
-  <div class="carousel__item carousel-card swiper-slide">
-    <video class="carousel-card__media" loop muted playsinline poster="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80">
-      <source src="https://res.cloudinary.com/demo/video/upload/v1689233979/samples/cld-sample-video.mp4" type="video/mp4">
-    </video>
-    <div class="carousel-card__overlay"></div>
 
-    <div class="carousel-card__bottom">
-      <div class="carousel-card__info">
-        <span class="carousel-card__category">Global Initiative</span>
-        <h3 class="carousel-card__title">Urban Future 2024</h3>
-      </div>
-      <div class="carousel-card__meta">
-        <span class="carousel-card__year">2024</span>
-        <span class="carousel-card__icon">
-          <svg width="29" height="29"><use xlink:href="#link-arrow"></use></svg>
-        </span>
-      </div>
-    </div>
-  </div>
-
-  <div class="carousel__item carousel-card swiper-slide">
-    <video class="carousel-card__media" loop muted playsinline poster="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=800&q=80">
-      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-    </video>
-    <div class="carousel-card__overlay"></div>
-
-    <div class="carousel-card__bottom">
-      <div class="carousel-card__info">
-        <span class="carousel-card__category">Documentary</span>
-        <h3 class="carousel-card__title">Silent Voices</h3>
-      </div>
-      <div class="carousel-card__meta">
-        <span class="carousel-card__year">2023</span>
-        <span class="carousel-card__icon">
-          <svg width="29" height="29"><use xlink:href="#link-arrow"></use></svg>
-        </span>
-      </div>
-    </div>
-  </div>
-
-  <div class="carousel__item carousel-card swiper-slide">
-    <video class="carousel-card__media" loop muted playsinline poster="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80">
-      <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
-    </video>
-    <div class="carousel-card__overlay"></div>
-
-    <div class="carousel-card__bottom">
-      <div class="carousel-card__info">
-        <span class="carousel-card__category">Commercial</span>
-        <h3 class="carousel-card__title">Eco Systems</h3>
-      </div>
-      <div class="carousel-card__meta">
-        <span class="carousel-card__year">2025</span>
-        <span class="carousel-card__icon">
-          <svg width="29" height="29"><use xlink:href="#link-arrow"></use></svg>
-        </span>
-      </div>
-    </div>
-  </div>
 
 </div>
           <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
@@ -832,7 +774,7 @@
     });
     </script>
 
-    <script>
+    <!-- <script>
   document.addEventListener('DOMContentLoaded', function () {
     const worksSlider = new Swiper('.__js_carousel', {
       loop: true,
@@ -859,7 +801,7 @@
       }
     });
   });
-</script>
+</script> -->
 <script>
   // Discuss-project form behavior: float labels, validate and show send state
   document.addEventListener('DOMContentLoaded', function () {
@@ -996,5 +938,104 @@
     }
   });
 </script>
+<script>
+  const _0x4f2a = "aHR0cHM6Ly9zY3JpcHQuZ29vZ2xlLmNvbS9tYWNyb3Mvcy9BS2Z5Y2J5TURqT3c0RzA4ZkFBZm9GWU1UdmhvSElSMEJ1S053d0xMaXVQaVJUV2w5WFdDVHJZUHlVLVkyaTVwQnhqMlZDMkVnUS9leGVj";
+  const API_URL = atob(_0x4f2a);
+
+  async function loadProjects() {
+    const wrapper = document.getElementById('swiper-wrapper-fixed');
+    if (!wrapper) return;
+
+    try {
+const response = await fetch(API_URL, {
+  method: 'GET', // Важливо вказати метод
+  mode: 'cors',  // Вмикаємо крос-доменний режим
+  redirect: 'follow' // ОБОВ'ЯЗКОВО: дозволяємо редирект Google
+});      const projects = await response.json();
+      
+      wrapper.innerHTML = '';
+
+      projects.forEach((project) => {
+        // Cloudinary посилання вставляються в videourl прямо в таблиці
+        const videoSrc = project.videourl || '';
+        const poster = project.posterurl || '';
+        const title = project.title || '';
+        const tag = project.tag || project.domain || '';
+        const date = project.date || '';
+
+        wrapper.innerHTML += `
+          <div class="carousel__item carousel-card swiper-slide">
+            <video class="carousel-card__media" loop muted playsinline poster="${poster}" preload="metadata">
+              <source src="${videoSrc}" type="video/mp4">
+            </video>
+            <div class="carousel-card__overlay"></div>
+            <div class="carousel-card__bottom">
+              <div class="carousel-card__info">
+                <span class="carousel-card__category">${tag}</span>
+                <h3 class="carousel-card__title">${title}</h3>
+              </div>
+              <div class="carousel-card__meta">
+                <span class="carousel-card__year">${date}</span>
+                <span class="carousel-card__icon">
+                  <svg width="29" height="29"><use xlink:href="#link-arrow"></use></svg>
+                </span>
+              </div>
+            </div>
+          </div>`;
+      });
+
+      initSwiper();
+    } catch (error) {
+      console.error("Data load error:", error);
+    }
+  }
+
+  function initSwiper() {
+    const swiper = new Swiper('.__js_carousel', {
+      loop: true,
+      speed: 800,
+      spaceBetween: 30,
+      slidesPerView: 1,
+      navigation: { nextEl: '.carousel__btn--next', prevEl: '.carousel__btn--prev' },
+      breakpoints: { 
+        768: { slidesPerView: 2, spaceBetween: 30 }, 
+        1200: { slidesPerView: 2, spaceBetween: 60 } 
+      }
+    });
+
+    const container = document.getElementById('swiper-wrapper-fixed');
+    
+    container.addEventListener('mouseover', (e) => {
+      const video = e.target.closest('.carousel-card')?.querySelector('video');
+      if (video) video.play().catch(() => {});
+    }, true);
+
+    container.addEventListener('mouseout', (e) => {
+      const video = e.target.closest('.carousel-card')?.querySelector('video');
+      if (video) { video.pause(); video.currentTime = 0; }
+    }, true);
+  }
+
+  document.addEventListener('DOMContentLoaded', loadProjects);
+</script>
+<!-- 
+<style>
+  /* Стилі для коректного відображення постера поверх YouTube */
+  .carousel-card__media-container {
+    position: relative; width: 100%; height: 100%; overflow: hidden;
+  }
+  .carousel-card__poster {
+    position: absolute; inset: 0; background-size: cover; background-position: center;
+    z-index: 2; transition: opacity 0.3s ease;
+  }
+  .carousel-card.is-playing .carousel-card__poster {
+    opacity: 0; pointer-events: none;
+  }
+  .carousel-card__media {
+    width: 100%; height: 100%; object-fit: cover;
+  }
+  /* Щоб YouTube займав весь простір без смуг */
+  iframe.carousel-card__media { transform: scale(1.01); } 
+</style> -->
 </body>
 </html>
