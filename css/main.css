@@ -350,6 +350,10 @@ a:focus {
   text-align: right;
 }
 
+.text-center {
+  text-align: center;
+}
+
 @media (min-width: 768px) {
   .text-md-right {
     text-align: right;
@@ -5599,6 +5603,409 @@ a:focus {
   }
 }
 
+/* clients */
+/* --- CLIENTS & REVIEWS SECTION --- */
+.clients-section {
+  background-color: var(--kryla-black);
+  position: relative;
+  overflow: hidden;
+  color: var(--kryla-white);
+}
+
+/* --- LOGO MARQUEE (MOVING LINE) --- */
+.logo-marquee-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 20px 0;
+  margin-top: 60px;
+  /* Легкі лінії зверху/знизу, щоб відокремити рядок */
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo-marquee {
+  display: flex;
+  width: fit-content;
+  /* Анімація руху */
+  animation: scroll-logos 40s linear infinite;
+}
+
+.marquee-group {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+  /* Відстань між логотипами */
+  padding-right: 80px;
+  /* Відстань між групами */
+}
+
+/* Зупиняти рух при наведенні мишки (опціонально) */
+.logo-marquee-wrapper:hover .logo-marquee {
+  animation-play-state: paused;
+}
+
+.marquee-logo {
+  height: 50px;
+  /* Єдина висота для всіх лого */
+  width: auto;
+  object-fit: contain;
+  /* Робимо всі логотипи ідеально білими */
+  filter: grayscale(100%) brightness(0) invert(1);
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.marquee-logo:hover {
+  opacity: 1;
+}
+
+/* Градієнтні "маски" по боках для м'якого зникнення */
+.marquee-fade-left,
+.marquee-fade-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100px;
+  /* Ширина затухання */
+  z-index: 2;
+  pointer-events: none;
+}
+
+.marquee-fade-left {
+  left: 0;
+  background: linear-gradient(to right, var(--kryla-dark-green), transparent);
+}
+
+.marquee-fade-right {
+  right: 0;
+  background: linear-gradient(to left, var(--kryla-dark-green), transparent);
+}
+
+/* Сама анімація */
+@keyframes scroll-logos {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+
+  /* Рухаємо на 50%, бо у нас 2 групи */
+}
+
+/* Адаптив для мобільних */
+@media (max-width: 768px) {
+  .marquee-group {
+    gap: 40px;
+    padding-right: 40px;
+  }
+
+  .marquee-logo {
+    height: 35px;
+    /* Менші лого на телефоні */
+  }
+
+  .logo-marquee {
+    animation-duration: 20s;
+    /* Трохи швидше на мобільному */
+  }
+}
+
+
+/* --- TESTIMONIAL SLIDER --- */
+.reviews-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.testimonial-block {
+  padding: 0 20px;
+  cursor: grab;
+  text-align: balance;
+
+}
+
+.testimonial-block:active {
+  cursor: grabbing;
+}
+
+.quote-icon {
+  color: var(--kryla-pink);
+  opacity: 0.6;
+  margin-bottom: 25px;
+  display: inline-block;
+  filter: grayscale(100%) brightness(0) invert(1);
+  width: auto;
+  max-height: 40px !important;
+}
+
+.testimonial-text {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  /* Компактний, але читабельний шрифт */
+  line-height: 1.6;
+  color: var(--kryla-white);
+  margin-bottom: 30px;
+  font-style: italic;
+  font-weight: 300;
+}
+
+@media (min-width: 992px) {
+  .testimonial-text {
+    font-size: 24px;
+  }
+}
+
+.testimonial-author {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 25px;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.author-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--kryla-white);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.author-role {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+.project-tag {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 5px 12px;
+  border: 1px solid rgba(255, 180, 210, 0.3);
+  color: var(--kryla-pink);
+  border-radius: 50px;
+  margin-top: 8px;
+}
+
+/* Slider Nav */
+.reviews-nav {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.reviews-btn {
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  background: transparent;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.reviews-btn:hover {
+  border-color: var(--kryla-pink);
+  color: var(--kryla-pink);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+
+/* --- TESTIMONIAL SLIDER --- */
+.reviews-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.testimonial-block {
+  text-align: center;
+  padding: 0 20px;
+  cursor: grab;
+}
+
+.testimonial-block:active {
+  cursor: grabbing;
+}
+
+.quote-icon {
+  color: var(--kryla-pink);
+  opacity: 0.6;
+  margin-bottom: 25px;
+  display: inline-block;
+}
+
+/* Typography Update: Smaller & Cleaner */
+.testimonial-text {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  /* Зменшено з 24/36px */
+  line-height: 1.6;
+  color: var(--kryla-white);
+  margin-bottom: 35px;
+  font-style: italic;
+  font-weight: 300;
+}
+
+@media (min-width: 992px) {
+  .testimonial-text {
+    font-size: 26px;
+    /* Оптимальний розмір для десктопу */
+  }
+}
+
+.testimonial-author {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 30px;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.author-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--kryla-white);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.author-role {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
+
+.project-tag {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 5px 12px;
+  border: 1px solid rgba(255, 180, 210, 0.3);
+  color: var(--kryla-pink);
+  border-radius: 50px;
+  margin-top: 10px;
+}
+
+/* Slider Navigation Buttons */
+.reviews-nav {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+
+}
+
+.reviews-btn {
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  background: transparent;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.reviews-btn:hover {
+  border-color: var(--kryla-pink);
+  color: var(--kryla-pink);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* --- TESTIMONIAL BLOCK --- */
+.testimonial-block {
+  position: relative;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.quote-icon {
+  color: var(--kryla-pink);
+  opacity: 0.8;
+  margin-bottom: 30px;
+  display: inline-block;
+}
+
+.testimonial-text {
+  font-family: var(--font-serif);
+  /* Використовуємо Serif для цитати */
+  font-size: 24px;
+  line-height: 1.5;
+  color: var(--kryla-white);
+  margin-bottom: 40px;
+  font-style: italic;
+  font-weight: 300;
+}
+
+@media (min-width: 992px) {
+  .testimonial-text {
+    font-size: 28px;
+    /* Велика типографіка на десктопі */
+    line-height: 1.3;
+  }
+}
+
+.testimonial-author {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 30px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.author-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--kryla-white);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.author-role {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 5px 0 0 0;
+}
+
+.project-tag {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 6px 12px;
+  border: 1px solid var(--kryla-pink);
+  color: var(--kryla-pink);
+  border-radius: 50px;
+  margin-top: 10px;
+  display: inline-block;
+}
+
+/* end clients */
+
 /* 3.17 Contact section in homepage */
 .contact-section {
   padding: 80px 0;
@@ -5664,7 +6071,7 @@ a:focus {
 }
 
 .contact-section__link a {
-  font-size: 24px;
+  font-size: 21px;
   font-weight: 500;
   line-height: 1.2;
   color: #000000;
@@ -5683,11 +6090,6 @@ a:focus {
   }
 }
 
-@media (min-width: 992px) {
-  .contact-section__link a {
-    font-size: 40px;
-  }
-}
 
 .contact-section__link a:focus {
   outline: none;
@@ -7499,6 +7901,225 @@ a:focus {
     transform: translateX(33px) translateY(-4px);
   }
 }
+
+/* --- SERVICES MODERN --- */
+.services-modern {
+  background-color: var(--kryla-black);
+  color: var(--kryla-white);
+  overflow: hidden;
+}
+
+/* Typography Overrides */
+.text-grey {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.section-title-small {
+  font-size: 24px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+/* FLOW ITEMS (MAIN LIST) */
+.services-flow {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.flow-item {
+  display: grid;
+  grid-template-columns: 1fr;
+  /* Mobile: 1 col */
+  gap: 20px;
+  padding: 40px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  transition: background-color 0.4s ease;
+  cursor: default;
+}
+
+/* DESKTOP LAYOUT: Широкий простір для назв послуг */
+@media (min-width: 992px) {
+  .flow-item {
+    /* 40% - для заголовка (було вужче)
+           1fr - для опису
+           auto - для стрілки
+        */
+    grid-template-columns: 40% 1fr auto;
+    align-items: flex-start;
+    padding: 60px 20px;
+    gap: 40px;
+  }
+}
+
+.flow-item:hover {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* Left Column: Number & Title */
+.flow-item__left {
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+}
+
+.flow-item__num {
+  font-family: monospace;
+  font-size: 14px;
+  color: var(--kryla-pink);
+  opacity: 0.8;
+  transform: translateY(-5px);
+  min-width: 25px;
+  /* Fix alignment */
+}
+
+.flow-item__title {
+  font-size: 28px;
+  font-weight: 500;
+  margin: 0;
+  color: var(--kryla-white);
+  line-height: 1.2;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+@media (min-width: 992px) {
+  .flow-item__title {
+    font-size: 42px;
+    /* Великий шрифт */
+  }
+}
+
+.flow-item:hover .flow-item__title {
+  color: var(--kryla-pink);
+  transform: translateX(10px);
+}
+
+/* Center Column: Description */
+.flow-item__center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.flow-item__desc {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 600px;
+  /* Трохи ширше */
+}
+
+/* Right Column: Arrow */
+.flow-item__right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  /* Центруємо стрілку по вертикалі */
+  height: 100%;
+}
+
+.flow-item__arrow {
+  color: var(--kryla-pink);
+  opacity: 0;
+  transform: translate(-20px, 0);
+  transition: all 0.4s ease;
+}
+
+@media (max-width: 991px) {
+  .flow-item__arrow {
+    display: none;
+  }
+}
+
+.flow-item:hover .flow-item__arrow {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+
+/* --- CAPABILITIES GRID (DARK) --- */
+.capabilities-grid {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.cap-card {
+  padding: 40px;
+  height: 100%;
+  transition: background 0.3s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Remove bottom border for last item on mobile */
+.col-12:last-child .cap-card {
+  border-bottom: none;
+}
+
+.cap-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.cap-card__title {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 16px;
+  color: var(--kryla-white);
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+
+.cap-card__text {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Borders logic for Desktop Grid */
+@media (min-width: 992px) {
+  .cap-card {
+    border-bottom: none;
+  }
+
+  .border-left-lg {
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .border-top-lg {
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+  }
+}
+
+/* CTA Card styling */
+.bg-pink-hover {
+  background: rgba(255, 255, 255, 0.05);
+  transition: 0.4s ease;
+}
+
+.bg-pink-hover:hover {
+  background: var(--kryla-pink);
+}
+
+.bg-pink-hover:hover .cap-card__link {
+  color: var(--kryla-black);
+}
+
+.cap-card__link {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 24px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--kryla-white);
+  transition: color 0.3s ease;
+  text-decoration: none;
+}
+
+/* End services */
 
 /* 3.28 Plans section in creative homepage */
 .plans-section .row {
@@ -10641,6 +11262,10 @@ a:focus {
   font-size: 1.3rem;
 }
 
+.header .logo-img {
+  max-width: 120px;
+}
+
 @media (min-width: 992px) {
   .header__mobile {
     -webkit-box-flex: 1;
@@ -10740,17 +11365,17 @@ a:focus {
 }
 
 .footer__brand-text {
-  font-size: 80px;
   font-weight: 900;
   line-height: 1;
-  margin: 0;
-  color: var(--kryla-text);
+  margin: auto 0;
 
   /* Vertical Text Setup */
   writing-mode: vertical-rl;
   text-orientation: mixed;
-  transform: rotate(180deg);
+  transform: rotate(270deg);
   white-space: nowrap;
+
+  width: 240px;
 }
 
 @media (max-width: 991px) {
@@ -10813,8 +11438,7 @@ a:focus {
 }
 
 .footer__email-link {
-  font-size: 3.5vw;
-  /* Адаптивний шрифт */
+  font-size: 2vw;
   font-weight: 500;
   color: var(--kryla-text);
   text-decoration: none;
