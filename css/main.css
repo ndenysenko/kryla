@@ -12051,6 +12051,13 @@ ul {
   color: var(--kryla-pink);
 }
 
+.btn-kryla--large {
+  color: var(--kryla-black) !important;
+  font-size: 1.2rem;
+  display: flex !important;
+  align-items: center;
+}
+
 /* 2. HEADER */
 .header {
   transition: all 0.4s ease;
