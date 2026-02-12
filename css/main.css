@@ -2417,6 +2417,11 @@ a:focus {
   font-style: italic;
 }
 
+.text-accent {
+  font-family: serif;
+  font-style: italic;
+}
+
 .sticky-wrapper {
   position: sticky;
   top: 100px;
